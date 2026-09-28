@@ -1,55 +1,67 @@
 #include <iostream>
-#include <list>
-#include <cstring> 
-
-struct Station {
-    char code[10];
-    char name[30];
-};
-
-void printStations(const std::list<Station>& stationList, int year) {
-    printf("=== %d Yamanote Line Stations ===\n", year);
-    for (const auto& station : stationList) {
-        printf("(%s, %s)\n", station.code, station.name);
-    }
-    printf("\n");
-}
-
-void insertBefore(std::list<Station>& list, const char targetName[], const Station& newStation) {
-    for (auto it = list.begin(); it != list.end(); ++it) {
-        if (std::strcmp(it->name, targetName) == 0) {
-            list.insert(it, newStation);
-            return;
-        }
-    }
-}
+#include <vector>
+#include <string>
+#include <algorithm>
 
 int main() {
-    system("chcp 65001 > nul");
-
-    std::list<Station> stationList = {
-        {"JY01", "Tokyo"},       {"JY02", "Kanda"},        {"JY03", "Akihabara"},
-        {"JY04", "Okachimachi"}, {"JY05", "Ueno"},         {"JY06", "Uguisudani"},
-        {"JY07", "Nippori"},     {"JY09", "Tabata"},       {"JY10", "Komagome"},
-        {"JY11", "Sugamo"},      {"JY12", "Otsuka"},       {"JY13", "Ikebukuro"},
-        {"JY14", "Mejiro"},      {"JY15", "Takadanobaba"}, {"JY16", "Shin-Okubo"},
-        {"JY17", "Shinjuku"},    {"JY18", "Yoyogi"},       {"JY19", "Harajuku"},
-        {"JY20", "Shibuya"},     {"JY21", "Ebisu"},        {"JY22", "Meguro"},
-        {"JY23", "Gotanda"},     {"JY24", "Osaki"},        {"JY25", "Shinagawa"},
-        {"JY26", "Tamachi"},     {"JY27", "Hamamatsucho"}, {"JY28", "Shimbashi"},
-        {"JY29", "Yurakucho"}
+    std::vector<std::string> emails = {
+        "k024g1017@g.neec.ac.jp",
+        "k024g0033@g.neec.ac.jp",
+        "k024g0057@g.neec.ac.jp",
+        "k024g0020@g.neec.ac.jp",
+        "k024g0109@g.neec.ac.jp",
+        "k024g1031@g.neec.ac.jp",
+        "k024g0004@g.neec.ac.jp",
+        "k024g0027@g.neec.ac.jp",
+        "k024g0058@g.neec.ac.jp",
+        "k022g0113@g.neec.ac.jp",
+        "k024g0007@g.neec.ac.jp",
+        "k024g0083@g.neec.ac.jp",
+        "k024g0110@g.neec.ac.jp",
+        "k024g0066@g.neec.ac.jp",
+        "k023g0029@g.neec.ac.jp",
+        "k024g1030@g.neec.ac.jp",
+        "k024g0106@g.neec.ac.jp",
+        "k024g0089@g.neec.ac.jp",
+        "k024g0101@g.neec.ac.jp",
+        "k024g0035@g.neec.ac.jp",
+        "k024g1025@g.neec.ac.jp",
+        "k024g0059@g.neec.ac.jp",
+        "k024g0006@g.neec.ac.jp",
+        "k023g0122@g.neec.ac.jp",
+        "k024g0028@g.neec.ac.jp",
+        "k024g1024@g.neec.ac.jp",
+        "k024g0108@g.neec.ac.jp",
+        "k024g0061@g.neec.ac.jp",
+        "k024g0104@g.neec.ac.jp",
+        "k024g0038@g.neec.ac.jp",
+        "k024g0032@g.neec.ac.jp",
+        "k024g0026@g.neec.ac.jp",
+        "k024g0001@g.neec.ac.jp",
+        "k024g0009@g.neec.ac.jp",
+        "k024g0112@g.neec.ac.jp",
+        "k024g0011@g.neec.ac.jp",
+        "k024g0085@g.neec.ac.jp",
+        "k024g0111@g.neec.ac.jp",
+        "k024g0045@g.neec.ac.jp",
+        "k024g0103@g.neec.ac.jp",
+        "k024g1002@g.neec.ac.jp",
+        "k024g0078@g.neec.ac.jp",
+        "k024g0044@g.neec.ac.jp",
+        "k024g0008@g.neec.ac.jp",
+        "k024g0075@g.neec.ac.jp",
+        "k024g0091@g.neec.ac.jp",
+        "k024g0064@g.neec.ac.jp",
+        "k024g0051@g.neec.ac.jp",
+        "k024g0093@g.neec.ac.jp",
+        "k024g0024@g.neec.ac.jp"
     };
 
-    // 1970 Output
-    printStations(stationList, 1970);
+    std::sort(emails.begin(), emails.end());
 
-	// 2019 Output
-    insertBefore(stationList, "Tabata", { "JY08", "Nishi-Nippori" });
-    printStations(stationList, 2019);
-
-	// 2022 Output
-    insertBefore(stationList, "Tamachi", { "JY26", "Takanawa-Gateway" });
-    printStations(stationList, 2022);
+    for (const auto& email : emails) {
+        std::cout << email << '\n';
+    }
 
     return 0;
 }
