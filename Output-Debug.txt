@@ -1,0 +1,12 @@
+﻿'PG3_00_01.exe' (Win32): Loaded 'C:\Users\TUF\source\repos\PG3\x64\Debug\PG3_00_01.exe'. Symbols loaded.
+'PG3_00_01.exe' (Win32): Loaded 'C:\Windows\System32\ntdll.dll'. Symbol loading disabled by Include/Exclude setting.
+'PG3_00_01.exe' (Win32): Loaded 'C:\Windows\System32\kernel32.dll'. Symbol loading disabled by Include/Exclude setting.
+'PG3_00_01.exe' (Win32): Loaded 'C:\Windows\System32\KernelBase.dll'. Symbol loading disabled by Include/Exclude setting.
+'PG3_00_01.exe' (Win32): Loaded 'C:\Windows\System32\vcruntime140d.dll'. Symbol loading disabled by Include/Exclude setting.
+'PG3_00_01.exe' (Win32): Loaded 'C:\Windows\System32\ucrtbased.dll'. Symbol loading disabled by Include/Exclude setting.
+The thread 10028 has exited with code 0 (0x0).
+'PG3_00_01.exe' (Win32): Loaded 'C:\Windows\System32\kernel.appcore.dll'. Symbol loading disabled by Include/Exclude setting.
+'PG3_00_01.exe' (Win32): Loaded 'C:\Windows\System32\msvcrt.dll'. Symbol loading disabled by Include/Exclude setting.
+The thread 16264 has exited with code 0 (0x0).
+The thread 25672 has exited with code 0 (0x0).
+The program '[22280] PG3_00_01.exe' has exited with code 0 (0x0).
