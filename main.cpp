@@ -1,53 +1,43 @@
 #include <iostream>
 #include <stdio.h>
+#include <time.h>
+#include <windows.h>
 
-int t = 0;
+void DelayReveal(void (*fn)(int, int), unsigned int delayMs, int roll, int userGuess) {
 
-int recursion(int n = 1, int salary = 100, bool first = true) {
-	if (n == 0) {
-		return salary;
+	for (int i = 0; i < 20; i ++) {
+		Sleep(delayMs/20);
+		printf(".");
 	}
-	if (first) {
-		salary = 100;
-		first = false;
-	}
-	else {
-		salary = salary * 2 - 50;
-	}
+	printf("\n");
+	
+	fn(roll, userGuess);
+}
 
-	t++;
-
-	if (t * 1226 <= salary) {
-		printf("\nt = %d, salary = %d/%d\n", t, salary, t * 1226);
+void ShowResult(int roll, int userGuess) {
+	if ((roll % 2 == 0 && userGuess == 0) || (roll % 2 == 1 && userGuess == 1)) {
+		printf("Correct! The dice roll was %d.(%s)\n", roll, (roll % 2 == 0) ? "even" : "odd");
+	} else {
+		printf("Incorrect. The dice roll was %d(%s).\n", roll, (roll % 2 == 0) ? "even" : "odd");
 	}
-
-	return recursion(n - 1, salary, first);
 }
 
 int main() {
 
-	printf("choose wage system (1: noraml, 2:recursion): ");
-	int choice = 0;
-	while (choice != 1 && choice != 2) {
-		std::cin >> choice;
-		if (choice != 1 && choice != 2) {
-			printf("Invalid choice. Please enter 1 or 2: ");
-		}
+	srand(time(NULL));
+
+	printf("please enter your guess(1:odd, 0:even): ");
+	int guess;
+	int result = scanf_s("%d", &guess);
+	if (result != 1 || guess < 0 || guess > 1) {
+		printf("Invalid input. Please enter 1 for odd or 0 for even.\n");
+		return 1;
 	}
 
-	printf("Enter the number of hours: ");
-	int hours;
-	std::cin >> hours;
+	int dice = rand() % 6 + 1; 
 
-	if (choice == 1) {
-		int salary = hours * 1226;
-		printf("Salary = % d\n", salary);
-	}
-	else if (choice == 2) {		
-		int salary = recursion(hours, 100, true);
-		printf("Salary = % d\n", salary);
+	DelayReveal(ShowResult, 3000, dice, guess);
 
-	}
 
 	return 0;
 }
