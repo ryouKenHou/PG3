@@ -4,42 +4,38 @@
 #include <windows.h>
 #include <functional>
 
-int main() {
-
-	srand(time(NULL));
-
-	printf("please enter your guess(1:odd, 0:even): ");
-	int guess;
-	int result = scanf_s("%d", &guess);
-	if (result != 1 || guess < 0 || guess > 1) {
-		printf("Invalid input. Please enter 1 for odd or 0 for even.\n");
-		return 1;
+class Enemy {
+public:
+	void approachingPhace() {
+		printf("Enemy is approaching!\n");
 	}
 
-	int dice = rand() % 6 + 1; 
+	void shootingPhace() {
+		printf("Enemy is shooting!\n");
+	}
 
-	auto DelayReveal = [](void (*fn)(int, int), unsigned int delayMs, int roll, int userGuess) {
+	void leavingPhace() {
+		printf("Enemy is leaving!\n");
+	}
 
-		for (int i = 0; i < 20; i++) {
-			Sleep(delayMs / 20);
-			printf(".");
-		}
-		printf("\n");
+	void (Enemy::*PhaceTable[3])() = { &Enemy::approachingPhace, &Enemy::shootingPhace, &Enemy::leavingPhace };
 
-		fn(roll, userGuess);
-		};
+	void update() {
+		(this->*PhaceTable[currentPhaceIndex_])();		
+		currentPhaceIndex_ = (currentPhaceIndex_ + 1) % 3;
+	}
 
-	auto ShowResult = [](int roll, int userGuess) {
-		if ((roll % 2 == 0 && userGuess == 0) || (roll % 2 == 1 && userGuess == 1)) {
-			printf("Correct! The dice roll was %d.(%s)\n", roll, (roll % 2 == 0) ? "even" : "odd");
-		}
-		else {
-			printf("Incorrect. The dice roll was %d(%s).\n", roll, (roll % 2 == 0) ? "even" : "odd");
-		}
-		};
+private:
+	size_t currentPhaceIndex_ = 0;
+};
 
+int main() {
 
-	DelayReveal(ShowResult, 3000, dice, guess);
+	Enemy enemy;
+
+	enemy.update(); // Enemy is approaching!
+	enemy.update(); // Enemy is shooting!
+	enemy.update(); // Enemy is leaving!
 
 
 	return 0;
