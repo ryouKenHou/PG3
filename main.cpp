@@ -1,42 +1,58 @@
 #include <iostream>
 
-class Animal {
+class IShape {
 public:
-	Animal() = default;
-	~Animal() = default;
-	virtual void makeSound() const = 0;
+    virtual ~IShape() = default;
+
+    virtual void Size() = 0; 
+    virtual void Draw() = 0; 
 };
 
-class Dog : public Animal {
-public:
-	Dog() = default;
-	~Dog() = default;
+class Circle : public IShape {
+private:
+    double radius; 
+    double area;   
 
-	void makeSound() const override {
-		printf("Woof!\n");
-	}
+public:
+    Circle(double r) : radius(r), area(0.0) {}
+
+    void Size() override {
+        area = 3.141592653589793 * radius * radius;
+    }
+
+    void Draw() override {
+		printf("Circle (Radius: %.2f) -> Area: %.2f\n", radius, area);
+    }
 };
 
-class Cat : public Animal {
+
+class Rectangle : public IShape {
+private:
+    double width;  
+    double height; 
+    double area;   
+
 public:
-	Cat() = default;
-	~Cat() = default;
-	void makeSound() const override {
-		printf("Meow!\n");
-	}
+    Rectangle(double w, double h) : width(w), height(h), area(0.0) {}
+
+    void Size() override {
+        area = width * height;
+    }
+
+    void Draw() override {
+		printf("Rectangle (Width: %.2f, Height: %.2f) -> Area: %.2f\n", width, height, area);
+    }
 };
-
-
 
 int main() {
+    Circle circle(5.0);
+    Rectangle rect(4.0, 6.0);
 
-	Animal* animals[] = { new Dog(), new Cat() };
+    IShape* shapes[] = { &circle, &rect };
+    for (IShape* shape : shapes) {
+        shape->Size();
+        shape->Draw();
+    }
 
-	for(auto animal : animals) {
-		animal->makeSound();
-		delete animal;
-	}
-
-
-	return 0;
+    return 0;
 }
