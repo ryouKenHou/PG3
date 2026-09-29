@@ -2,25 +2,7 @@
 #include <stdio.h>
 #include <time.h>
 #include <windows.h>
-
-void DelayReveal(void (*fn)(int, int), unsigned int delayMs, int roll, int userGuess) {
-
-	for (int i = 0; i < 20; i ++) {
-		Sleep(delayMs/20);
-		printf(".");
-	}
-	printf("\n");
-	
-	fn(roll, userGuess);
-}
-
-void ShowResult(int roll, int userGuess) {
-	if ((roll % 2 == 0 && userGuess == 0) || (roll % 2 == 1 && userGuess == 1)) {
-		printf("Correct! The dice roll was %d.(%s)\n", roll, (roll % 2 == 0) ? "even" : "odd");
-	} else {
-		printf("Incorrect. The dice roll was %d(%s).\n", roll, (roll % 2 == 0) ? "even" : "odd");
-	}
-}
+#include <functional>
 
 int main() {
 
@@ -35,6 +17,27 @@ int main() {
 	}
 
 	int dice = rand() % 6 + 1; 
+
+	auto DelayReveal = [](void (*fn)(int, int), unsigned int delayMs, int roll, int userGuess) {
+
+		for (int i = 0; i < 20; i++) {
+			Sleep(delayMs / 20);
+			printf(".");
+		}
+		printf("\n");
+
+		fn(roll, userGuess);
+		};
+
+	auto ShowResult = [](int roll, int userGuess) {
+		if ((roll % 2 == 0 && userGuess == 0) || (roll % 2 == 1 && userGuess == 1)) {
+			printf("Correct! The dice roll was %d.(%s)\n", roll, (roll % 2 == 0) ? "even" : "odd");
+		}
+		else {
+			printf("Incorrect. The dice roll was %d(%s).\n", roll, (roll % 2 == 0) ? "even" : "odd");
+		}
+		};
+
 
 	DelayReveal(ShowResult, 3000, dice, guess);
 
