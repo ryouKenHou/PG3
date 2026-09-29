@@ -30,11 +30,12 @@ public:
 
 int main() {
 
-	Cat cat = Cat();
-	Dog dog = Dog();
+	Animal* animals[] = { new Dog(), new Cat() };
 
-	dog.makeSound();
-	cat.makeSound();
+	for(auto animal : animals) {
+		animal->makeSound();
+		delete animal;
+	}
 
 
 	return 0;
