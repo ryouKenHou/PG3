@@ -1,21 +1,34 @@
 #include <iostream>
 
-template <typename T>
-T Min(T a, T b){
-   if (a > b) {
-	   return b;
-   }
-   return a;
+int recursion(int n = 1, int salary = 100, bool first = true, int t = 0, int sum1 = 0, int sum2 = 0) {
+	if (n == 0) {
+		return salary;
+	}
+	if (first) {
+		salary = 100;
+		first = false;
+	}
+	else {
+		salary = salary * 2 - 50;
+	}
+
+	t++;
+
+	sum1 += salary;
+	sum2 += 1226;
+
+	printf("|| Hour %3d:|recursive Salary: %5d, earned: %5d \t| Normal Salary: 1226 , earned: %5d\n", t, salary, sum1, sum2);
+
+	return recursion(n - 1, salary, first, t, sum1, sum2);
 }
 
 int main() {
-	int intNum = Min<int>(10, 20);
-	float floatNum = Min<float>(10.5f, 20.5f);
-	double doubleNum = Min<double>(10.123456789, 20.123456789);
+	printf("Enter the number of hours: ");
+	int hours;
+	std::cin >> hours;
 
-	printf("Integer: %d\n", intNum);
-	printf("Float: %.9f\n", floatNum);
-	printf("Double: %.9lf\n", doubleNum);
+	int salary = recursion(hours, 100, true);
+	printf("Salary = % d\n", salary);
 
-    return 0;
+	return 0;
 }
