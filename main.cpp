@@ -1,16 +1,17 @@
 #include <iostream>
 
 template <typename T>
-T getNum(){
-    T num;
-	num = static_cast<T>(30.123456789);
-    return num;
+T Min(T a, T b){
+   if (a > b) {
+	   return b;
+   }
+   return a;
 }
 
 int main() {
-	int intNum = getNum<int>();
-	float floatNum = getNum<float>();
-	double doubleNum = getNum<double>();
+	int intNum = Min<int>(10, 20);
+	float floatNum = Min<float>(10.5f, 20.5f);
+	double doubleNum = Min<double>(10.123456789, 20.123456789);
 
 	printf("Integer: %d\n", intNum);
 	printf("Float: %.9f\n", floatNum);
