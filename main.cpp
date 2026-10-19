@@ -1,58 +1,21 @@
 #include <iostream>
 
-class IShape {
-public:
-    virtual ~IShape() = default;
-
-    virtual void Size() = 0; 
-    virtual void Draw() = 0; 
-};
-
-class Circle : public IShape {
-private:
-    double radius; 
-    double area;   
-
-public:
-    Circle(double r) : radius(r), area(0.0) {}
-
-    void Size() override {
-        area = 3.141592653589793 * radius * radius;
-    }
-
-    void Draw() override {
-		printf("Circle (Radius: %.2f) -> Area: %.2f\n", radius, area);
-    }
-};
-
-
-class Rectangle : public IShape {
-private:
-    double width;  
-    double height; 
-    double area;   
-
-public:
-    Rectangle(double w, double h) : width(w), height(h), area(0.0) {}
-
-    void Size() override {
-        area = width * height;
-    }
-
-    void Draw() override {
-		printf("Rectangle (Width: %.2f, Height: %.2f) -> Area: %.2f\n", width, height, area);
-    }
-};
+template <typename T>
+T Min(T a, T b){
+   if (a > b) {
+	   return b;
+   }
+   return a;
+}
 
 int main() {
-    Circle circle(5.0);
-    Rectangle rect(4.0, 6.0);
+	int intNum = Min<int>(10, 20);
+	float floatNum = Min<float>(10.5f, 20.5f);
+	double doubleNum = Min<double>(10.123456789, 20.123456789);
 
-    IShape* shapes[] = { &circle, &rect };
-    for (IShape* shape : shapes) {
-        shape->Size();
-        shape->Draw();
-    }
+	printf("Integer: %d\n", intNum);
+	printf("Float: %.9f\n", floatNum);
+	printf("Double: %.9lf\n", doubleNum);
 
     return 0;
 }
